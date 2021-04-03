@@ -1,0 +1,23 @@
+{
+  "name": "peer-connect",
+  "version": "1.0.0",
+  "description": "a webrtc app to connect in-browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nilinswap/peer-connect.git"
+  },
+  "keywords": [
+    "webrtc",
+    "peerjs"
+  ],
+  "author": "nilinswap@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nilinswap/peer-connect/issues"
+  },
+  "homepage": "https://github.com/nilinswap/peer-connect#readme"
+}
