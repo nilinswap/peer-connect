@@ -62,7 +62,7 @@ remote_peer_form.onsubmit = function(e){
     conn.on('close', function () {
         show_disconnected();
     });
-
+    setTimeout(function() { remote_peer_form.reset(); }, 500);
 }
 
 function appendOutgoing(newMessage){
@@ -122,6 +122,7 @@ message_form.onsubmit = function(e){
         return;
     }
     appendOutgoing(newMessage);
+    this.reset()
 }
 
 
@@ -139,6 +140,9 @@ function show_disconnected(){
     window.remotePeerId = remotePeerId = null;
     connection_status.innerHTML = "unconnected";
     disconnect_button.style.display = 'none';
+    while (message_history.hasChildNodes()) {
+        message_history.removeChild(message_history.lastChild);
+    }
 }
 
 disconnect_button.onclick = show_disconnected;
