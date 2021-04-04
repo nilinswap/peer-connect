@@ -11,14 +11,19 @@
 </head>
 
 <body>
-    <p> Your Peer Id is - <div id="peer-id"></div></p>
+    <p> Your Peer Id is - <span id="peer-id"></span></p>
     <br>
     <form id="remote-peer-form" action="" method="GET">
         <label for="remote-peer-id">Enter a Peer Id to connect with - </label>
         <input name="remote-peer-id" id="remote-peer-id">
         <input type="submit">
     </form>
-    <p id="notice-board"></p>
+    <br>
+    <div id="notice-board">
+        <p>Status is - <span id="connection-status"> unconnected. </span></p>
+    </div>
+
+    <button id="disconnect-button" style="display: none;">Disconnect</button>
 
     <br>
     <br>

@@ -1,46 +1,72 @@
+const peer_id = document.getElementById('peer-id');
+const remote_peer_form = document.getElementById("remote-peer-form");
+const remote_peer_id = document.getElementById("remote-peer-id");
+const connection_status = document.getElementById("connection-status")
+const message_form = document.getElementById("message-form");
+const message_content = document.getElementById("message-content");
+const message_history = document.getElementsByClassName("msg_history")[0];
+const disconnect_button = document.getElementById("disconnect-button");
+
 var peer = new Peer();
-console.log("peer", peer);
 
-const peeriddiv = document.getElementById('peer-id');
-const remotepeerform = document.getElementById("remote-peer-form");
-const remotepeerid = document.getElementById("remote-peer-id");
-const noticeBoard = document.getElementById("notice-board");
-const messageForm = document.getElementById("message-form");
-const messageContent = document.getElementById("message-content");
-const messageHistory = document.getElementsByClassName("msg_history")[0];
-
-
-peer.on('open', function(id) {
+peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
-    peeriddiv.textContent = window.peerid = id;
+    peer_id.textContent = window.peerid = id;
 });
 
-peer.on('connection', function(conn) {
-    conn.on('data', function(data){
-        console.log("recieved messsage:", data);
-        newIncomingMessage = data;
+var conn = null;  // initially unconnected
+var remotePeerId = null; // initially unknown
 
-        appendIncoming(newIncomingMessage)
+function ready() {
+    conn.on('data', function (data) {
+        console.log("Data recieved");
+        appendIncoming(data)
     });
-    conn.on('open', () => {
-        conn.send('AHello from ' + window.peerid );
+    conn.on('close', function () {
+        connection_status.innerHTML = "unconnected";
+        conn = window.conn = null;
+        remotePeerId = window.remotePeerId = null;
     });
+}
+
+peer.on('connection', function(c) {
+    if(conn && conn.open){ //if already connected.
+        c.on('open', function() {
+            c.send("Already connected to another client");
+            console.log("WARNING: Already connected to another cleint");
+            setTimeout(function() { c.close(); }, 500);
+        });
+        return;
+    }
+    conn = window.conn = c;  //IPH set connection
+    console.log("Connected to: " + conn.peer);
+    remotePeerId = window.remotePeerId = conn.peer;
+    connection_status.innerHTML = "Connected with " + conn.peer;
+    ready();
 });
 
-var conn = null;
-remotepeerform.onsubmit = function(e){
+remote_peer_form.onsubmit = function(e){
     e.preventDefault()
-    window.remotepeerid=remotepeerid;
-    var remotePeerId = remotepeerid.value
-    noticeBoard.textContent = "connecting with " + remotePeerId + " ..."
+    if(conn && conn.open){ //if already connected
+        console.log("WARNING: already connected to: " + remotePeerId); //TODO: Allow disconnect
+        return;
+    }
+    window.remotePeerId= remotePeerId = remote_peer_id.value
     conn = peer.connect(remotePeerId);
     conn.on('open', function() {
-        // Receive messages
-        conn.on('data', function(data) {
-            console.log('Received message', data);
-        });
-        // Send messages
-        conn.send('BHello from ' + window.peerid );
+        connection_status.innerHTML = "connected to " + remotePeerId;
+        console.log("Connected to: " +remotePeerId);
+    });
+
+    conn.on('data', function(data) {
+        console.log('Received message', data);
+        appendIncoming(data);
+    });
+
+    conn.on('close', function () {
+        connection_status.innerHTML = "Connection closed";
+        conn = null;
+        remotePeerId = null;
     });
 
 }
@@ -57,7 +83,7 @@ function appendOutgoing(newMessage){
 
     sentMsg.appendChild(msgContent);
     outgoingMsg.appendChild(sentMsg);
-    messageHistory.appendChild(outgoingMsg)
+    message_history.appendChild(outgoingMsg)
 
 }
 
@@ -87,14 +113,26 @@ function appendIncoming(newMessage){
 
     incomingMsg.appendChild(incomingMsgImgdiv)
     incomingMsg.appendChild(recievedMsg)
-    messageHistory.appendChild(incomingMsg)
+    message_history.appendChild(incomingMsg)
 
 }
 
-messageForm.onsubmit = function(e){
+
+message_form.onsubmit = function(e){
     e.preventDefault();
-    const newMessage = messageContent.value;
-    conn.send(newMessage)
+    const newMessage = message_content.value;
+    if(conn && conn.open){
+        conn.send(newMessage)
+    }else{
+        console.log("WARNING: not connected to any peer");
+        return;
+    }
     appendOutgoing(newMessage);
 }
 
+
+function show_connected(c, peer){
+    window.conn = conn = c;
+    window.remotePeerId = remotePeerId = peer;
+    connection_status.innerHTML = "connected to " + remotePeerId;
+}
