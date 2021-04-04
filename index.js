@@ -23,9 +23,7 @@ function ready() {
         appendIncoming(data)
     });
     conn.on('close', function () {
-        connection_status.innerHTML = "unconnected";
-        conn = window.conn = null;
-        remotePeerId = window.remotePeerId = null;
+        show_disconnected();
     });
 }
 
@@ -39,9 +37,8 @@ peer.on('connection', function(c) {
         return;
     }
     conn = window.conn = c;  //IPH set connection
+    show_connected(c, conn.peer);
     console.log("Connected to: " + conn.peer);
-    remotePeerId = window.remotePeerId = conn.peer;
-    connection_status.innerHTML = "Connected with " + conn.peer;
     ready();
 });
 
@@ -51,10 +48,9 @@ remote_peer_form.onsubmit = function(e){
         console.log("WARNING: already connected to: " + remotePeerId); //TODO: Allow disconnect
         return;
     }
-    window.remotePeerId= remotePeerId = remote_peer_id.value
-    conn = peer.connect(remotePeerId);
+    conn = peer.connect(remote_peer_id.value);
     conn.on('open', function() {
-        connection_status.innerHTML = "connected to " + remotePeerId;
+        show_connected(conn, conn.peer)
         console.log("Connected to: " +remotePeerId);
     });
 
@@ -64,9 +60,7 @@ remote_peer_form.onsubmit = function(e){
     });
 
     conn.on('close', function () {
-        connection_status.innerHTML = "Connection closed";
-        conn = null;
-        remotePeerId = null;
+        show_disconnected();
     });
 
 }
@@ -135,4 +129,16 @@ function show_connected(c, peer){
     window.conn = conn = c;
     window.remotePeerId = remotePeerId = peer;
     connection_status.innerHTML = "connected to " + remotePeerId;
+    disconnect_button.style.display = 'block';
 }
+
+function show_disconnected(){
+    if(conn)
+        conn.close();
+    window.conn = conn = null;
+    window.remotePeerId = remotePeerId = null;
+    connection_status.innerHTML = "unconnected";
+    disconnect_button.style.display = 'none';
+}
+
+disconnect_button.onclick = show_disconnected;
