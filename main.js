@@ -6,6 +6,8 @@ const message_form = document.getElementById("message-form");
 const message_content = document.getElementById("message-content");
 const message_history = document.getElementsByClassName("msg_history")[0];
 const disconnect_button = document.getElementById("disconnect-button");
+const call_button = document.getElementById("call-button");
+const audio_element = document.getElementById("audio-element");
 
 var peer = new Peer();
 
@@ -16,6 +18,7 @@ peer.on('open', function(id) {    // on start
 
 var conn = null;  // initially unconnected
 var remotePeerId = null; // initially unknown
+var call = null; //initially unconnected
 
 function ready() {
     conn.on('data', function (data) {
@@ -41,6 +44,34 @@ peer.on('connection', function(c) {
     console.log("Connected to: " + conn.peer);
     ready();
 });
+
+let renderAudio = (stream) => {
+    audio_element.srcObject = stream;
+};
+
+// Handle incoming voice/video connection
+peer.on('call', (call) => {
+    navigator.mediaDevices.getUserMedia({video: false, audio: true})
+        .then((stream) => {
+            call.answer(stream); // Answer the call with an A/V stream.
+            call.on('stream', renderAudio);
+        })
+        .catch((err) => {
+            console.error('Failed to get local stream', err);
+        });
+});
+
+call_button.onclick = function(){
+    navigator.mediaDevices.getUserMedia({video: false, audio: true})
+        .then((stream) => {
+            let call = peer.call(remotePeerId, stream);
+            call.on('stream', renderAudio);
+        })
+        .catch((err) => {
+            logMessage('Failed to get local stream', err);
+        });
+}
+
 
 remote_peer_form.onsubmit = function(e){
     e.preventDefault()
