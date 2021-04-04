@@ -7,17 +7,51 @@
     <meta name="author" content="nilinswap" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/style.css" />
+
 </head>
 
 <body>
-    <p> Your Peer Id is - <div id="peer-id"></div></p>
+    <p> Your Peer Id is - <span id="peer-id"></span></p>
     <br>
     <form id="remote-peer-form" action="" method="GET">
         <label for="remote-peer-id">Enter a Peer Id to connect with - </label>
         <input name="remote-peer-id" id="remote-peer-id">
         <input type="submit">
     </form>
-    <p id="notice-board"></p>
+    <br>
+    <div id="notice-board">
+        <p>Status is - <span id="connection-status"> unconnected. </span></p>
+    </div>
+
+    <button id="disconnect-button" style="display: none;">Disconnect</button>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="messaging">
+            <div class="inbox_msg">
+
+                <div class="mesgs">
+                    <div class="msg_history">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <form id="message-form" action="" method="POST">
+                <input name="message-content" id="message-content">
+                <input type="submit">
+            </form>
+
+        </div>
+
+        <div>
+            created by nilinswap
+        </div>
+
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script src="index.js"></script>
 </body>
