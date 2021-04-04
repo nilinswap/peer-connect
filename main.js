@@ -7,6 +7,7 @@ const message_content = document.getElementById("message-content");
 const message_history = document.getElementsByClassName("msg_history")[0];
 const disconnect_button = document.getElementById("disconnect-button");
 const call_button = document.getElementById("call-button");
+const hangup_button = document.getElementById("hangup-button");
 const audio_element = document.getElementById("audio-element");
 
 var peer = new Peer();
@@ -18,7 +19,7 @@ peer.on('open', function(id) {    // on start
 
 var conn = null;  // initially unconnected
 var remotePeerId = null; // initially unknown
-var call = null; //initially unconnected
+var localStream = null; //initially unconnected
 
 function ready() {
     conn.on('data', function (data) {
@@ -55,6 +56,7 @@ peer.on('call', (call) => {
         .then((stream) => {
             call.answer(stream); // Answer the call with an A/V stream.
             call.on('stream', renderAudio);
+            localStream = stream;
         })
         .catch((err) => {
             console.error('Failed to get local stream', err);
@@ -66,10 +68,21 @@ call_button.onclick = function(){
         .then((stream) => {
             let call = peer.call(remotePeerId, stream);
             call.on('stream', renderAudio);
+            localStream = stream;
         })
         .catch((err) => {
             logMessage('Failed to get local stream', err);
         });
+}
+
+hangup_button.onclick = function(){
+    audio_element.pause();
+    localStream.getTracks().forEach(function(track) {
+        if (track.readyState == 'live' && track.kind === 'audio') {
+            track.stop();
+        }
+    });
+
 }
 
 
