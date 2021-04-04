@@ -32,7 +32,7 @@ peer.on('connection', function(c) {
         c.on('open', function() {
             c.send("Already connected to another client");
             console.log("WARNING: Already connected to another cleint");
-            setTimeout(function() { c.close(); }, 500);
+            setTimeout(function() { c.close(); }, 5000);
         });
         return;
     }
