@@ -33,10 +33,11 @@ function ready(conn) {
 
 }
 
-peer.on('connection', function(c) {
+peer.on('connection', async function(c) {
     c.on('open', function() {
         console.log("connecting to a new client", c.peer);
     });
+    await conn_list.push(c);
     show_connected(c, conn_list);
     console.log("Connected to: " + c.peer);
     ready(c);
@@ -87,12 +88,11 @@ remote_peer_form.onsubmit = function(e){
     let conn = peer.connect(remote_peer_id.value,{
         reliable: true
     });
-    window.connn = conn;
-    console.log("onsubmit of form", conn);
 
 
     conn.on('open', function() {
         console.log("Connected to: " +conn.peer);
+        conn_list.push(conn);
         show_connected(conn, conn_list)
     });
 
@@ -105,7 +105,7 @@ remote_peer_form.onsubmit = function(e){
         show_disconnected();
     });
     console.log("conn_list", conn_list);
-    setTimeout(function() { remote_peer_form.reset(); }, 500);
+    setTimeout(function() { remote_peer_form.reset(); }, 5000);
 }
 
 function appendOutgoing(newMessage){
@@ -173,7 +173,7 @@ message_form.onsubmit = function(e){
 
 
 function show_connected(conn, conn_list){
-    conn_list.push(conn);
+
     console.log("inside show_connected", conn_list);
     window.conn_list = conn_list;
     if(conn_list.length === 0)
