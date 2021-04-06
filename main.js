@@ -66,9 +66,12 @@ peer.on('call', (call) => {
 call_button.onclick = function(){
     navigator.mediaDevices.getUserMedia({video: false, audio: true})
         .then((stream) => {
-            let call = peer.call(remotePeerId, stream);
-            call.on('stream', renderAudio);
-            localStream = stream;
+            for (let i in conn_list){
+                let call = peer.call(conn_list[i].peer, stream);
+                console.log("calling", conn_list[i].peer)
+                call.on('stream', renderAudio);
+                localStream = stream;
+            }
         })
         .catch((err) => {
             logMessage('Failed to get local stream', err);
