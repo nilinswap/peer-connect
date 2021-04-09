@@ -13,6 +13,11 @@ const audio_element = document.getElementById("audio-element");
 let peer = new Peer({
     config: {'iceServers': [
             { url: 'stun:stun.l.google.com:19302' },
+            {
+                url: 'turn:numb.viagenie.ca',
+                credential: 'muazkh',
+                username: 'webrtc@live.com'
+            }
             ]},
     secure: true,
     path: '/'
