@@ -10,7 +10,14 @@ const call_button = document.getElementById("call-button");
 const hangup_button = document.getElementById("hangup-button");
 const audio_element = document.getElementById("audio-element");
 
-let peer = new Peer();
+let peer = new Peer({
+    config: {'iceServers': [
+            { url: 'stun:stun.l.google.com:19302' },
+            ]},
+    secure: true,
+    path: '/'
+
+});
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
