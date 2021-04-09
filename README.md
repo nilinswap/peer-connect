@@ -8,6 +8,8 @@ open file://<abs-path-to-project-container>/peer-connect/index.html in browser i
 ## Hooks?
 1. Fix resistive connect with peer issue - sometimes even after hitting submit with a peerid there is no connect.
 
+1.1 connect out of nat
+
 2. Try multiple peer connect
 
 3. how can you provision this using a single javascript?
