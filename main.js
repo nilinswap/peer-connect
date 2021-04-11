@@ -14,7 +14,7 @@ let peer = new Peer({
     config: {'iceServers': [
             { url: 'stun:stun.l.google.com:19302' },
             {
-                url: 'turn:www.myturn.codes:3478',
+                url: 'turn:www.myturn.codes:3478?transport=tcp',
                 credential: 'iceburg',
                 username: 'wasfooledbycp9'
             }
@@ -24,7 +24,7 @@ let peer = new Peer({
 
 });
 
-console.log("deployed new");
+console.log("deployed ana new");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
