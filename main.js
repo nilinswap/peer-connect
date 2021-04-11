@@ -14,9 +14,9 @@ let peer = new Peer({
     config: {'iceServers': [
             { url: 'stun:stun.l.google.com:19302' },
             {
-                url: 'turn:numb.viagenie.ca',
-                credential: 'muazkh',
-                username: 'webrtc@live.com'
+                url: 'turn:www.myturn.codes:3478',
+                credential: 'iceburg',
+                username: 'wasfooledbycp9'
             }
             ]},
     secure: true,

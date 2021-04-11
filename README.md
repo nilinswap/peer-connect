@@ -19,3 +19,8 @@ open file://<abs-path-to-project-container>/peer-connect/index.html in browser i
 ## Some Language
 
 IPH - Iske Paise Hai
+
+## Resources
+
+1. [webrtc connectivity usecases](https://blog.addpipe.com/troubleshooting-webrtc-connection-issues/)
+2. 
