@@ -24,7 +24,7 @@ let peer = new Peer({
 
 });
 
-console.log("deployed", b43706b75b5bb70f519a3657f35216b16d58e7b9);
+console.log("deployed new");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
