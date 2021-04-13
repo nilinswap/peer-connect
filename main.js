@@ -15,8 +15,8 @@ let peer = new Peer({
             { url: 'stun:stun.l.google.com:19302' },
             {
                 url: 'turn:www.myturn.codes:3478?transport=tcp',
-                credential: 'nilinswap',
-                username: 'seeqcaoclq'
+                credential: 'seeqcaoclq',
+                username: 'nilinswap'
             }
             ]},
     secure: true,
