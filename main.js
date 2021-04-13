@@ -22,7 +22,10 @@ let peer = new Peer({
                 credential: 'wasfooledbycp9',
                 username: 'iceburg'
             }
-            ]},
+            ],
+    },
+    iceTransportPolicy: 'relay',
+    debug: 3,
     secure: true,
     path: '/'
 
