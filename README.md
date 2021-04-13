@@ -23,4 +23,4 @@ IPH - Iske Paise Hai
 ## Resources
 
 1. [webrtc connectivity usecases](https://blog.addpipe.com/troubleshooting-webrtc-connection-issues/)
-2. 
+2. running your own coturn server in ec2. Mostly [this](https://medium.com/@omidborjian/setup-your-own-turn-stun-signal-relay-server-on-aws-ec2-78a8bfcb71c3) and also [this.](https://medium.com/swlh/setup-your-own-coturn-server-using-aws-ec2-instance-29303101e7b5)
