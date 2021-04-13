@@ -10,6 +10,10 @@ const call_button = document.getElementById("call-button");
 const hangup_button = document.getElementById("hangup-button");
 const audio_element = document.getElementById("audio-element");
 
+let conn = null;  // initially unconnected
+let remotePeerId = null; // initially unknown
+let localStream = null; //initially unconnected
+
 let peer = new Peer({
     config: {'iceServers': [
             { url: 'stun:stun.l.google.com:19302' },
@@ -31,30 +35,31 @@ peer.on('open', function(id) {    // on start
     peer_id.textContent = window.peerid = id;
 });
 
-var conn_list = [];  // initially unconnected
-var localStream = null; //initially unconnected
 
-function ready(conn) {
-    console.log("ready", conn);
 
-        conn.on('data', function (data) {
-            console.log("Data recieved");
-            appendIncoming(conn.peer+" " + data)
-        });
-        conn.on('close', function () {
-            show_disconnected();
-        });
-
+function ready() {
+    conn.on('data', function (data) {
+        console.log("Data recieved");
+        appendIncoming(data)
+    });
+    conn.on('close', function () {
+        show_disconnected();
+    });
 }
 
-peer.on('connection', async function(c) {
-    c.on('open', function() {
-        console.log("connecting to a new client", c.peer);
-    });
-    await conn_list.push(c);
-    show_connected(c, conn_list);
-    console.log("Connected to: " + c.peer);
-    ready(c);
+peer.on('connection', function(c) {
+    if(conn && conn.open){ //if already connected.
+        c.on('open', function() {
+            c.send("Already connected to another client");
+            console.log("WARNING: Already connected to another cleint");
+            setTimeout(function() { c.close(); }, 5000);
+        });
+        return;
+    }
+    conn = window.conn = c;  //IPH set connection
+    show_connected(c, conn.peer);
+    console.log("Connected to: " + conn.peer);
+    ready();
 });
 
 let renderAudio = (stream) => {
@@ -77,12 +82,12 @@ peer.on('call', (call) => {
 call_button.onclick = function(){
     navigator.mediaDevices.getUserMedia({video: false, audio: true})
         .then((stream) => {
-            for (let i in conn_list){
-                let call = peer.call(conn_list[i].peer, stream);
-                console.log("calling", conn_list[i].peer)
-                call.on('stream', renderAudio);
-                localStream = stream;
-            }
+
+            let call = peer.call(conn.peer, stream);
+            console.log("calling", conn.peer)
+            call.on('stream', renderAudio);
+            localStream = stream;
+
         })
         .catch((err) => {
             logMessage('Failed to get local stream', err);
@@ -102,19 +107,19 @@ hangup_button.onclick = function(){
 
 remote_peer_form.onsubmit = function(e){
     e.preventDefault()
-    let conn = peer.connect(remote_peer_id.value,{
-        reliable: true
-    });
-
-    conn_list.push(conn);
+    if(conn && conn.open){ //if already connected
+        console.log("WARNING: already connected to: " + remotePeerId); //TODO: Allow disconnect
+        return;
+    }
+    conn = peer.connect(remote_peer_id.value);
     conn.on('open', function() {
-        console.log("Connected to: " +conn.peer);
-        show_connected(conn, conn_list)
+        show_connected(conn, conn.peer)
+        console.log("Connected to: " +remotePeerId);
     });
 
     conn.on('data', function(data) {
         console.log('Received message', data);
-        appendIncoming(conn.peer+" " + data);
+        appendIncoming(data);
     });
 
     conn.on('close', function () {
@@ -174,11 +179,9 @@ function appendIncoming(newMessage){
 message_form.onsubmit = function(e){
     e.preventDefault();
     const newMessage = message_content.value;
-    if(conn_list.length !== 0){
-        for (let i in conn_list){
-            let conn = conn_list[i];
-            conn.send(newMessage)
-        }
+    if(conn && conn.open){
+        console.log("sending data", newMessage);
+        conn.send(newMessage)
     }else{
         console.log("WARNING: not connected to any peer");
         return;
@@ -188,28 +191,19 @@ message_form.onsubmit = function(e){
 }
 
 
-function show_connected(conn, conn_list){
-
-    console.log("inside show_connected", conn_list);
-    window.conn_list = conn_list;
-    if(conn_list.length === 0)
-        return;
-    if (conn_list.length === 1){
-        connection_status.innerHTML = "connected to " + conn_list[0].peer;
-    }else{
-        connection_status.innerHTML += " and connected to " + conn_list[conn_list.length-1].peer;
-    }
+function show_connected(c, peer) {
+    window.conn = conn = c;
+    window.remotePeerId = remotePeerId = peer;
+    connection_status.innerHTML = "connected to " + remotePeerId;
     disconnect_button.style.display = 'block';
 }
 
 function show_disconnected(){
-    if(conn_list.length !== 0){
-        for (let i in conn_list){
-            let conn = conn_list[i];
-            conn.close();
-        }
-    }
-    window.conn_list = conn_list = [];
+    if(conn)
+        conn.close();
+    window.conn = conn = null;
+    window.remotePeerId = remotePeerId = null;
+
     connection_status.innerHTML = "unconnected";
     disconnect_button.style.display = 'none';
     while (message_history.hasChildNodes()) {
