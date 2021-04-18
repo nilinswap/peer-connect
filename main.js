@@ -16,9 +16,9 @@ let localStream = null; //initially unconnected
 
 let peer = new Peer({
     config: {'iceServers': [
-            { url: 'stun:stun.l.google.com:19302' },
+            { url: 'stun:stun.myturn.codes:3478' },
             {
-                url: 'turn:www.myturn.codes:3478?transport=tcp',
+                url: 'turn:turn.myturn.codes:3478',
                 credential: 'wasfooledbycp9',
                 username: 'iceburg'
             }

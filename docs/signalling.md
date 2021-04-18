@@ -1,0 +1,6 @@
+
+# Signalling
+
+If you read this https://webrtc.org/getting-started/peer-connections (signalling sub-heading only) , it seems peerjs is required to solve the problem of signalling only. Signalling is the process by which two peers are prepared for the peer-to-peer connection that they are about to make. they do this by exchanging the info in some way. So basically you need an id-ip mapping somewhere or else how can one know how to connect you? webrtc comes after you have exchanged various prerequisite information.. you have to do this some other way than RTCPeerConnection. Once these info has been shared to peers, peer to peer connection can start without the need of signalling channel. this https://www.webrtc-experiment.com/docs/WebRTC-PeerConnection.html confirms it.
+here signalling channel is a socket channel used to only conform with SDP. after that RTCPeerConnection overtakes the source code. peerjs does signalling the server-in-the-middle way( still it might be using sockets underneath) using id; in the above link, it is done peer to peer using websocket. How peerjs exactly works? I have no idea, I will read their code.
+this also answers my very basic question I asked a few days back "what is the unique handle a peer uses to connect with other peer"

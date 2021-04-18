@@ -1,0 +1,1 @@
+[nat and webrtc ](https://webrtchacks.com/an-intro-to-webrtcs-natfirewall-problem/)
