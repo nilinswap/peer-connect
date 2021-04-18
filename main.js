@@ -24,7 +24,7 @@ let peer = new Peer({
             }
             ],
     },
-    //iceTransportPolicy: 'relay',
+    iceTransportPolicy: 'relay',
     debug: 3,
     secure: true,
 
