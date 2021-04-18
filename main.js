@@ -128,7 +128,6 @@ remote_peer_form.onsubmit = function(e){
     conn.on('close', function () {
         show_disconnected();
     });
-    console.log("conn_list", conn_list);
     setTimeout(function() { remote_peer_form.reset(); }, 5000);
 }
 
