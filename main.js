@@ -24,14 +24,13 @@ let peer = new Peer({
             }
             ],
     },
-    iceTransportPolicy: 'relay',
+    //iceTransportPolicy: 'relay',
     debug: 3,
     secure: true,
-    path: '/'
 
 });
 
-console.log("deployed  Anna Hajare same url");
+console.log("deployed  Anna Hajare no relay");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
