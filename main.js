@@ -27,10 +27,11 @@ let peer = new Peer({
     iceTransportPolicy: 'relay',
     debug: 3,
     secure: true,
+    path: '/'
 
 });
 
-console.log("deployed  Anna Hajare no relay");
+console.log("deployed  Anna Hajare same url");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
