@@ -86,6 +86,9 @@ img {max-width: 100%;}
     float: left;
     padding: 40px;
     width: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100px;
 }
 
 .sent_msg p {
