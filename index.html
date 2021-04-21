@@ -14,60 +14,64 @@
 <body>
     <h1>Peer-connect</h1>
     <p> A webrtc chat app made using peerjs.</p>
-    <br><br><br>
-    <p> Your Peer Id is - <span id="peer-id"></span></p>
     <br>
-    <form id="remote-peer-form" action="" method="GET">
-        <label for="remote-peer-id">Enter a Peer Id to connect with - </label>
-        <input name="remote-peer-id" id="remote-peer-id">
-        <input type="submit">
-    </form>
-    <br>
-    <div id="notice-board">
-        <p>Status is - <span id="connection-status"> unconnected. </span></p>
-    </div>
 
-    <button id="disconnect-button" style="display: none;">Disconnect</button>
+
+
 
     <br>
     <br>
     <br>
 
-    <audio id="audio-element" autoplay controls></audio>
-    <button id="call-button">call</button>
-    <button id="hangup-button">hang up</button>
+
     <h3>Chat Box</h3>
 
     <div class="container">
-        <div class="messaging">
-            <div class="inbox_msg">
 
-                <div class="mesgs">
-                    <div class="msg_history">
 
-                    </div>
-
-                </div>
-            </div>
-
-            <form id="message-form" action="" method="POST">
-                <input name="message-content" id="message-content">
-                <input type="submit" value="send">
-            </form>
-
-        </div>
+<!--        for chat popup-->
         <button class="open-button" onclick="openForm()">Chat</button>
 
         <div class="chat-popup" id="myForm">
-            <form action="" class="form-container">
-                <h1>Chat</h1>
-
-                <label for="msg" id="msg-label"><b>Message</b></label>
-                <textarea placeholder="Type message.." name="msg" id="msg" required></textarea>
-
-                <button type="submit" class="btn">Send</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            <p> Your Peer Id is - <span id="peer-id"></span></p>
+            <br>
+            <form id="remote-peer-form" action="" method="GET">
+                <label for="remote-peer-id">Enter a Peer Id to connect with - </label>
+                <input name="remote-peer-id" id="remote-peer-id">
+                <input type="submit">
             </form>
+
+            <div id="notice-board">
+                <p>Status is - <span id="connection-status"> unconnected. </span></p>
+                <button id="disconnect-button" style="display: none;">Disconnect</button>
+            </div>
+
+            <audio id="audio-element" autoplay controls></audio>
+            <br>
+            <button id="call-button">call</button>
+            <br>
+            <button id="hangup-button">hang up</button>
+
+
+            <div class="messaging">
+                <div class="inbox_msg">
+
+                    <div class="mesgs">
+                        <div class="msg_history">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <form id="message-form" action="" method="POST">
+                    <input name="message-content" id="message-content">
+                    <input type="submit" value="send">
+                </form>
+
+            </div>
+            <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </div>
         <script>
             function openForm() {
@@ -86,3 +90,5 @@
     <script src="main.js"></script>
 </body>
 </html>
+
+
