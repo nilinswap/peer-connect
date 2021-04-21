@@ -7,6 +7,7 @@
     <meta name="author" content="nilinswap" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/chatPopup.css" />
 
 </head>
 
@@ -55,7 +56,28 @@
             </form>
 
         </div>
+        <button class="open-button" onclick="openForm()">Chat</button>
 
+        <div class="chat-popup" id="myForm">
+            <form action="" class="form-container">
+                <h1>Chat</h1>
+
+                <label for="msg" id="msg-label"><b>Message</b></label>
+                <textarea placeholder="Type message.." name="msg" id="msg" required></textarea>
+
+                <button type="submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+        </script>
         <div>
             created by nilinswap
         </div>
