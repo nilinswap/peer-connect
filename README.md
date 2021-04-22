@@ -6,15 +6,17 @@ open file://<abs-path-to-project-container>/peer-connect/index.html in browser i
 
 
 ## Hooks?
-1. Fix resistive connect with peer issue - sometimes even after hitting submit with a peerid there is no connect.
+- solve echo problem
 
-1.1 connect out of nat
+- create design for auto-connect (without peer-id)
 
-2. Try multiple peer connect
+- create api design
 
-3. how can you provision this using a single javascript?
+- how can you provision this using a single javascript?
 
-4. How to bring in authentication
+- How to bring in authentication
+
+- Try multiple peer connect
 
 ## commands
 
