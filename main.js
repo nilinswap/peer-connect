@@ -33,7 +33,7 @@ let peer = new Peer({
 
 });
 
-console.log("deployed  Anna Hajare same url");
+console.log("deployed no muted");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
