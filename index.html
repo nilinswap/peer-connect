@@ -7,60 +7,88 @@
     <meta name="author" content="nilinswap" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/chatPopup.css" />
 
 </head>
 
 <body>
     <h1>Peer-connect</h1>
     <p> A webrtc chat app made using peerjs.</p>
-    <br><br><br>
-    <p> Your Peer Id is - <span id="peer-id"></span></p>
     <br>
-    <form id="remote-peer-form" action="" method="GET">
-        <label for="remote-peer-id">Enter a Peer Id to connect with - </label>
-        <input name="remote-peer-id" id="remote-peer-id">
-        <input type="submit">
-    </form>
-    <br>
-    <div id="notice-board">
-        <p>Status is - <span id="connection-status"> unconnected. </span></p>
-    </div>
 
-    <button id="disconnect-button" style="display: none;">Disconnect</button>
+
+
 
     <br>
     <br>
     <br>
 
-    <audio id="audio-element" autoplay controls></audio>
-    <button id="call-button">call</button>
-    <button id="hangup-button">hang up</button>
+
     <h3>Chat Box</h3>
 
     <div class="container">
-        <div class="messaging">
-            <div class="inbox_msg">
 
-                <div class="mesgs">
-                    <div class="msg_history">
 
-                    </div>
+<!--        for chat popup-->
+        <button class="open-button" onclick="openForm()">Chat</button>
 
-                </div>
-            </div>
-
-            <form id="message-form" action="" method="POST">
-                <input name="message-content" id="message-content">
-                <input type="submit" value="send">
+        <div class="chat-popup" id="myForm">
+            <p> Your Peer Id is - <span id="peer-id"></span></p>
+            <br>
+            <form id="remote-peer-form" action="" method="GET">
+                <label for="remote-peer-id">Enter a Peer Id to connect with - </label>
+                <input name="remote-peer-id" id="remote-peer-id">
+                <input type="submit">
             </form>
 
-        </div>
+            <div id="notice-board">
+                <p>Status is - <span id="connection-status"> unconnected. </span></p>
+                <button id="disconnect-button" style="display: none;">Disconnect</button>
+            </div>
 
-        <div>
+            <div id="audio-div">
+                <audio id="audio-element" autoplay controls muted="muted"></audio>
+                <button id="call-button">call</button>
+                <button id="hangup-button">hang up</button>
+            </div>
+
+
+
+            <div class="messaging">
+                <div class="inbox_msg">
+
+                    <div class="mesgs" id="mesgs-scrollable">
+                        <div class="msg_history">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <form id="message-form" action="" method="POST">
+                    <input name="message-content" id="message-content">
+                    <input type="submit" value="send">
+                </form>
+
+            </div>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+        <div >
             created by nilinswap
         </div>
     </div>
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 </html>
+
+

@@ -1,3 +1,5 @@
+import * as utils from "./utils.js"
+
 const peer_id = document.getElementById('peer-id');
 const remote_peer_form = document.getElementById("remote-peer-form");
 const remote_peer_id = document.getElementById("remote-peer-id");
@@ -132,40 +134,41 @@ remote_peer_form.onsubmit = function(e){
 }
 
 function appendOutgoing(newMessage){
-    outgoingMsg = document.createElement('div');
+    let outgoingMsg = document.createElement('div');
     outgoingMsg.classList.add('outgoing_msg');
 
-    sentMsg = document.createElement('div');
+    let sentMsg = document.createElement('div');
     sentMsg.classList.add('sent_msg');
 
-    msgContent = document.createElement('p')
+    let msgContent = document.createElement('p')
     msgContent.textContent = newMessage
 
     sentMsg.appendChild(msgContent);
     outgoingMsg.appendChild(sentMsg);
     message_history.appendChild(outgoingMsg)
+    utils.updateScroll();
 
 }
 
 function appendIncoming(newMessage){
-    incomingMsg = document.createElement('div');
+    let incomingMsg = document.createElement('div');
     incomingMsg.classList.add('incoming_msg');
 
-    incomingMsgImg = document.createElement('img');
+    let incomingMsgImg = document.createElement('img');
     incomingMsgImg.src="https://ptetutorials.com/images/user-profile.png";
-    incomingMsgImgdiv = document.createElement('div');
+    let incomingMsgImgdiv = document.createElement('div');
     incomingMsgImgdiv.classList.add('incoming_msg_img');
     incomingMsgImgdiv.appendChild(incomingMsgImg)
 
 
 
-    recievedMsg = document.createElement('div');
+    let recievedMsg = document.createElement('div');
     recievedMsg.classList.add('received_msg');
 
-    recievedWithdMsg = document.createElement('div');
+    let recievedWithdMsg = document.createElement('div');
     recievedWithdMsg.classList.add('received_withd_msg');
 
-    msgContent = document.createElement('p')
+    let msgContent = document.createElement('p')
     msgContent.textContent = newMessage
 
     recievedWithdMsg.appendChild(msgContent);
@@ -174,7 +177,7 @@ function appendIncoming(newMessage){
     incomingMsg.appendChild(incomingMsgImgdiv)
     incomingMsg.appendChild(recievedMsg)
     message_history.appendChild(incomingMsg)
-
+    utils.updateScroll();
 }
 
 

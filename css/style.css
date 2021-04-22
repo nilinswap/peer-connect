@@ -2,13 +2,41 @@ body {
     font-family: sans-serif !important;
 }
 .bg-funky	{
-    background: #FF1744;
+    background: #ff1744;
+}
+
+audio::-webkit-media-controls-panel {
+    background: white;
+    border-radius: 0;
+}
+audio::-webkit-media-controls-timeline{
+    display: none;
+}
+
+audio::-webkit-media-controls-play-button{
+    margin-right: 20px;
+}
+audio::-webkit-media-controls-volume-slider{
+    float: right;
 }
 
 .heading {
     color: #fff;
     margin: 30px;
     font-weight: 600;
+}
+
+#audio-element {
+    width: 200px;
+}
+
+#audio-div {
+    display: flex;
+}
+
+#call-button, #hangup-button {
+    height: 20px;
+    margin: 15px;
 }
 
 img {max-width: 100%;}
@@ -84,8 +112,12 @@ img {max-width: 100%;}
 .received_withd_msg { width: 70%;}
 .mesgs {
     float: left;
-    padding: 40px;
+    padding: 20px;
+    padding-bottom: 0px;
     width: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 200px;
 }
 
 .sent_msg p {
