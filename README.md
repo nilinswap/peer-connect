@@ -9,15 +9,27 @@ if above doesn't work, try this `http-server . -p 8000` and go `http://127.0.0.1
 
 ## Hooks?
 
-- how can you provision this using a single javascript?
+- how can you provision this using a single javascript? - almost done but have to import css as css-in-js otherwise one has to import css stylesheet under head tag.
+
+below is doable. (although, we can reduce it to only one file by putting peerjs.min.js inside our project and plainly importing it.)
+```html
+<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+<script src="https://nilinswap.github.io/peer-connect/main.js" type="module"></script>
+``` 
+
+but having to include this too( and that too under Head), is just too much. 
+```html
+<link rel="stylesheet" href="https://nilinswap.github.io/peer-connect/css/style.css" />
+<link rel="stylesheet" href="https://nilinswap.github.io/peer-connect/css/chatPopup.css" />
+```
+
+- Move Typescript in.
 
 - Lets move out of github pages
   
 - create design for auto-connect (without peer-id)
 
 - create api design
-
-- Move Typescript in.
 
 - How to bring in authentication
 
