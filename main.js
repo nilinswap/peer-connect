@@ -12,6 +12,8 @@ const call_button = document.getElementById("call-button");
 const hangup_button = document.getElementById("hangup-button");
 const audio_element = document.getElementById("audio-element");
 
+audio_element.volume = 0.3;
+
 let conn = null;  // initially unconnected
 let remotePeerId = null; // initially unknown
 let localStream = null; //initially unconnected
@@ -33,7 +35,7 @@ let peer = new Peer({
 
 });
 
-console.log("deployed no muted and some constraint and my life is majak");
+console.log("deployed no muted and some constraint, mazak");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
