@@ -73,7 +73,7 @@ let renderAudio = (stream) => {
 
 // Handle incoming voice/video connection
 peer.on('call', (call) => {
-    navigator.mediaDevices.getUserMedia({video: false,  audio: { echoCancellation: true }})
+    navigator.mediaDevices.getUserMedia({video: false,  audio: { echoCancellation: false }})
         .then((stream) => {
             call.answer(stream); // Answer the call with an A/V stream.
             call.on('stream', renderAudio);
@@ -85,7 +85,7 @@ peer.on('call', (call) => {
 });
 
 call_button.onclick = function(){
-    navigator.mediaDevices.getUserMedia({ video: false,  audio: { echoCancellation: true } })
+    navigator.mediaDevices.getUserMedia({ video: false,  audio: { echoCancellation: false } })
         .then((stream) => {
 
             let call = peer.call(conn.peer, stream);
