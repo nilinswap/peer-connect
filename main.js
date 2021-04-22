@@ -33,7 +33,7 @@ let peer = new Peer({
 
 });
 
-console.log("deployed no muted and some constraint");
+console.log("deployed no muted and some constraint and my life is majak");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
@@ -73,7 +73,7 @@ let renderAudio = (stream) => {
 
 // Handle incoming voice/video connection
 peer.on('call', (call) => {
-    navigator.mediaDevices.getUserMedia({video: false,  audio: { echoCancellation: false }})
+    navigator.mediaDevices.getUserMedia({video: false,  audio: true})
         .then((stream) => {
             call.answer(stream); // Answer the call with an A/V stream.
             call.on('stream', renderAudio);
@@ -85,7 +85,7 @@ peer.on('call', (call) => {
 });
 
 call_button.onclick = function(){
-    navigator.mediaDevices.getUserMedia({ video: false,  audio: { echoCancellation: false } })
+    navigator.mediaDevices.getUserMedia({ video: false,  audio: true })
         .then((stream) => {
 
             let call = peer.call(conn.peer, stream);
