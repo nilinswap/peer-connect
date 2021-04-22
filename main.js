@@ -33,7 +33,7 @@ let peer = new Peer({
 
 });
 
-console.log("deployed no muted");
+console.log("deployed no muted and some constraint");
 
 peer.on('open', function(id) {    // on start
     console.log('My peer ID is: ' + id);
