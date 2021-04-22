@@ -1,4 +1,14 @@
 import * as utils from "./utils.js"
+import chat_popup_html_string from "./hatchtml.js"
+
+// create a chat pop up dynamically when page is loaded
+
+let cphs = window.test = utils.htmlToElement(chat_popup_html_string);
+document.getElementsByTagName('body')[0].append(cphs);
+//set onclicks for some of above divs
+document.getElementById("open-chat-button").onclick = utils.openForm;
+document.getElementById("close-chat-button").onclick = utils.closeForm;
+
 
 const peer_id = document.getElementById('peer-id');
 const remote_peer_form = document.getElementById("remote-peer-form");

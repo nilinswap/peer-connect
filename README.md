@@ -10,10 +10,14 @@ if above doesn't work, try this `http-server . -p 8000` and go `http://127.0.0.1
 ## Hooks?
 
 - how can you provision this using a single javascript?
+
+- Lets move out of github pages
   
 - create design for auto-connect (without peer-id)
 
 - create api design
+
+- Move Typescript in.
 
 - How to bring in authentication
 
@@ -68,3 +72,4 @@ IPH - Iske Paise Hai
 3. [is webrtc using turn?](https://stackoverflow.com/questions/18177093/how-to-check-if-webrtc-uses-a-relay-server)
 4. [dh-pem](https://github.com/coturn/coturn/issues/629)
 5. [webrtc handles echo/noise cancellation?](https://github.com/webrtc/samples/issues/1243)
+6. [create dom from html](https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro)
