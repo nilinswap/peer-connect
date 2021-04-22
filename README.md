@@ -8,13 +8,12 @@ open file://<abs-path-to-project-container>/peer-connect/index.html in browser i
 if above doesn't work, try this `http-server . -p 8000` and go `http://127.0.0.1:8000` to see your thing.
 
 ## Hooks?
-- solve echo problem
 
+- how can you provision this using a single javascript?
+  
 - create design for auto-connect (without peer-id)
 
 - create api design
-
-- how can you provision this using a single javascript?
 
 - How to bring in authentication
 
@@ -68,3 +67,4 @@ IPH - Iske Paise Hai
 2. [ami image for coturn?](https://stackoverflow.com/questions/43284758/coturn-server-relay-is-not-working)
 3. [is webrtc using turn?](https://stackoverflow.com/questions/18177093/how-to-check-if-webrtc-uses-a-relay-server)
 4. [dh-pem](https://github.com/coturn/coturn/issues/629)
+5. [webrtc handles echo/noise cancellation?](https://github.com/webrtc/samples/issues/1243)
