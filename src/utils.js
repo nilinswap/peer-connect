@@ -1,3 +1,4 @@
+import * as test_ from "./test"
 
 let element = document.getElementById("mesgs-scrollable");
 export function updateScroll(){

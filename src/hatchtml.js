@@ -1,5 +1,5 @@
 
-var chat_popup_html_string = `
+let chat_popup_html_string= `
     <div class="container">
 
 

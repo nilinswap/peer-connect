@@ -2,7 +2,7 @@
   "name": "peer-connect",
   "version": "1.0.0",
   "description": "a webrtc app to connect in-browser.",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/nilinswap/peer-connect/issues"
   },
-  "homepage": "https://github.com/nilinswap/peer-connect#readme"
+  "homepage": "https://github.com/nilinswap/peer-connect#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }
