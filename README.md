@@ -2,7 +2,9 @@
 A webrtc chat app made using peerjs. hosted [here](https://nilinswap.github.io/peer-connect/)
 
 # Run locally
-open file://<abs-path-to-project-container>/peer-connect/index.html in browser in two tabs. Open console, connect one tab to other and see them talking.
+
+1. `tsc`
+2. open file://<abs-path-to-project-container>/peer-connect/index.html in browser in two tabs. Open console, connect one tab to other and see them talking.
 
 
 if above doesn't work, try this `http-server . -p 8000` and go `http://127.0.0.1:8000` to see your thing.
